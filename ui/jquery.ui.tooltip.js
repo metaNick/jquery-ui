@@ -70,6 +70,17 @@ $.widget( "ui.tooltip", {
 	},
 
 	_create: function() {
+		var $container = $('<div>');
+
+		$container
+			.attr({
+				id: 'test',
+				'role': 'log',
+				'aria-live': 'polite',
+				'aria-relevant': 'additions'
+			});
+
+		$('body').append($container);
 		this._on({
 			mouseover: "open",
 			focusin: "open"
@@ -243,7 +254,7 @@ $.widget( "ui.tooltip", {
 		}
 
 		tooltip = this._tooltip( target );
-		addDescribedBy( target, tooltip.attr( "id" ) );
+		//addDescribedBy( target, tooltip.attr( "id" ) );
 		tooltip.find( ".ui-tooltip-content" ).html( content );
 
 		function position( event ) {
@@ -322,7 +333,7 @@ $.widget( "ui.tooltip", {
 			target.attr( "title", target.data( "ui-tooltip-title" ) );
 		}
 
-		removeDescribedBy( target );
+		//removeDescribedBy( target );
 
 		tooltip.stop( true );
 		this._hide( tooltip, this.options.hide, function() {
@@ -361,7 +372,7 @@ $.widget( "ui.tooltip", {
 		$( "<div>" )
 			.addClass( "ui-tooltip-content" )
 			.appendTo( tooltip );
-		tooltip.appendTo( this.document[0].body );
+		tooltip.appendTo($('#test'));
 		this.tooltips[ id ] = element;
 		return tooltip;
 	},
